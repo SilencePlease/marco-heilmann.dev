@@ -1,0 +1,101 @@
+baseURL = "https://marco-heilmann.dev/"
+title = "Marco Heilmann"
+defaultContentLanguage = "de"
+theme = "PaperMod"
+
+[languages]
+  [languages.de]
+    label = "Deutsch"
+    locale = "de-DE"
+    weight = 1
+
+# --- Build ---
+enableRobotsTXT = true
+enableEmoji = true
+enableInlineShortcodes = true
+buildDrafts = false
+buildFuture = false
+buildExpired = false
+
+[pagination]
+  pagerSize = 8
+
+[minify]
+  disableXML = true
+  minifyOutput = true
+
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+
+# --- Menü oben rechts ---
+[menu]
+  [[menu.main]]
+    identifier = "posts"
+    name = "Beiträge"
+    url = "/posts/"
+    weight = 10
+  [[menu.main]]
+    identifier = "tags"
+    name = "Tags"
+    url = "/tags/"
+    weight = 20
+  [[menu.main]]
+    identifier = "about"
+    name = "Über mich"
+    url = "/about/"
+    weight = 30
+  [[menu.main]]
+    identifier = "search"
+    name = "Suche"
+    url = "/search/"
+    weight = 40
+
+# --- Syntax-Highlighting (Chroma) ---
+[markup]
+  [markup.highlight]
+    noClasses = false
+    guessSyntax = true
+    lineNos = false
+    tabWidth = 4
+  [markup.goldmark.renderer]
+    unsafe = true
+
+# --- PaperMod-Parameter ---
+[params]
+  env = "production"
+  author = "Marco Heilmann"
+  description = "Notizen zu Linux, Homelab und IT-Sicherheit von Marco Heilmann."
+  keywords = ["Linux", "IT-Sicherheit", "Homelab", "Systemadministration", "Security"]
+  DateFormat = "2. January 2006"
+  defaultTheme = "auto"
+  disableThemeToggle = false
+
+  ShowReadingTime = true
+  ShowShareButtons = false
+  ShowPostNavLinks = true
+  ShowBreadCrumbs = true
+  ShowCodeCopyButtons = true
+  ShowRssButtonInSectionTermList = true
+  ShowToc = true
+  TocOpen = false
+  hideMeta = false
+
+  # Startseite:
+  [params.homeInfoParams]
+    Title = "Moin, ich bin Marco"
+    Content = "Ich studiere IT-Sicherheit und schreibe hier über Linux, mein Homelab und alles rund um sichere Infrastruktur. Schau dich um oder lies zuerst [Über mich](/about/)."
+
+  # Icons unter dem Intro
+  [[params.socialIcons]]
+    name = "codeberg"
+    url = "https://codeberg.org/Not_Marv/"
+  [[params.socialIcons]]
+    name = "rss"
+    url = "/index.xml"
+
+  # Favicon
+  # [params.assets]
+  #   favicon = "/favicon.ico"
+
+[taxonomies]
+  tag = "tags"

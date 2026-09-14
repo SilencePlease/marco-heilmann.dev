@@ -1,0 +1,24 @@
+# Woodpecker-Pipeline: Hugo bauen und zu Cloudflare Pages deployen.
+# Benötigt zwei Secrets in Woodpecker (Repo -> Settings -> Secrets):
+#   cloudflare_api_token   (Token mit "Cloudflare Pages: Edit")
+#   cloudflare_account_id
+# "marco-heilmann" unten muss dem Cloudflare-Projektnamen entsprechen.
+
+when:
+  - event: push
+    branch: main
+
+steps:
+  bauen-und-deployen:
+    image: node:22-bookworm
+    environment:
+      CLOUDFLARE_API_TOKEN:
+        from_secret: cloudflare_api_token
+      CLOUDFLARE_ACCOUNT_ID:
+        from_secret: cloudflare_account_id
+    commands:
+      - curl -sSL https://github.com/gohugoio/hugo/releases/download/v0.166.0/hugo_extended_0.166.0_linux-amd64.tar.gz -o hugo.tar.gz
+      - tar -xzf hugo.tar.gz hugo
+      - install -m 0755 hugo /usr/local/bin/hugo
+      - hugo --gc --minify
+      - npx --yes wrangler@latest pages deploy public --project-name=marco-heilmann --branch=main
